@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ColorfulMessage from "./components/ColorfulMessage";
 
 const App = () => {
@@ -18,6 +18,9 @@ const App = () => {
     setFaceShowFlag(!faceShowFlag);
   }
 
+//useEffectで処理の関心を分離できる
+//最後の引数で値を設定することでそこの変更にあった場合のみに走るようになる
+useEffect(() => {
   if(num > 0){
     if (num % 3 === 0){
       faceShowFlag || setFaceShowFlag(true);
@@ -27,6 +30,8 @@ const App = () => {
       faceShowFlag && setFaceShowFlag(false);
     }
   }
+},[num]);
+//から配列の場合コンポーネントが実行される最初の１回だけ実行できる処理もかける
 
   return (
     // スタイルを指定する場合は２種類あり、{}で中身を書くか、定数宣言してから中身を書いていくか
